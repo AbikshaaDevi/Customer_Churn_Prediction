@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Churn Predictor</title>
+    <style>
+        body {
+            background-color:rgb(236, 236, 178);
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: rgb(255, 186, 186);
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #15226e;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #f08484;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #15226e;
+            color: rgba(255, 255, 255, 0.733);
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #15226e;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Churn Prediction</h2>
+        <form action="/predict" method="POST">
+            <label>Tenure (in months):</label>
+            <input type="number" name="tenure" required>
+
+            <label>Monthly Charges:</label>
+            <input type="number" step="any" name="MonthlyCharges" required>
+
+            <label>Contract Type:</label>
+            <select name="Contract" required>
+                <option>Month-to-month</option>
+                <option>One year</option>
+                <option>Two year</option>
+            </select>
+
+            <label>Internet Service:</label>
+            <select name="InternetService" required>
+                <option>DSL</option>
+                <option>Fiber optic</option>
+                <option>No</option>
+            </select>
+
+            <label>Payment Method:</label>
+            <select name="PaymentMethod" required>
+                <option>Electronic check</option>
+                <option>Mailed check</option>
+                <option>Bank transfer (automatic)</option>
+                <option>Credit card (automatic)</option>
+            </select>
+
+            <label>Senior Citizen:</label>
+            <select name="SeniorCitizen" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+           <strong>Prediction:</strong><br>
+           {{ prediction|safe }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
